@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   .custom-alert {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.custom-alert-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.custom-alert-content p {
+  margin-bottom: 10px;
+}
+
+.custom-alert-content button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+
+
+#product-categories {
+  padding: 20px;
+}
+
+#product-categories h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.category-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category {
+  text-align: center;
+  margin: 20px;
+}
+
+.category img {
+  width: 200px;
+}
+
+.category h3 {
+  margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+    
+    <button id="shop-button">Shop</button>
+
+<div id="custom-alert" class="custom-alert">
+  <div class="custom-alert-content">
+    <p id="custom-alert-message"></p>
+    <button id="check-item-button">Check Item</button>
+    <button id="go-back-button">Go Back</button>
+  </div>
+</div>
+
+
+<section id="product-categories">
+    <h2>Product Categories</h2>
+    <div class="category-container">
+      <div class="category">
+        <img src="category1.jpg" alt="Category 1">
+        <h3>Category 1</h3>
+      </div>
+      <div class="category">
+        <img src="category2.jpg" alt="Category 2">
+        <h3>Category 2</h3>
+      </div>
+      <div class="category">
+        <img src="category3.jpg" alt="Category 3">
+        <h3>Category 3</h3>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+<script>
+    function showAlert(message) {
+  var alertBox = document.getElementById("custom-alert");
+  var alertMessage = document.getElementById("custom-alert-message");
+  alertMessage.textContent = message;
+  alertBox.style.display = "block";
+}
+
+var shopButton = document.getElementById("shop-button");
+var checkItemButton = document.getElementById("check-item-button");
+var goBackButton = document.getElementById("go-back-button");
+var alertBox = document.getElementById("custom-alert");
+var alertMessage = document.getElementById("custom-alert-message");
+
+shopButton.addEventListener("click", function() {
+  showAlert("Item added to cart.");
+});
+
+checkItemButton.addEventListener("click", function() {
+  // Perform action for checking item
+  hideAlert();
+});
+
+goBackButton.addEventListener("click", function() {
+  // Perform action for going back
+  hideAlert();
+});
+
+function showAlert(message) {
+  alertMessage.textContent = message;
+  alertBox.style.display = "block";
+}
+
+function hideAlert() {
+  alertBox.style.display = "none";
+}
+</script>
+</html>

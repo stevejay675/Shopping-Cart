@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./cart.css">
+  <link rel="stylesheet" href="./footer.css">
+  <title>Shopping Cart</title>
+</head>
+
+<body>
+  <header>
+    <h1>Your Shopping Cart</h1>
+  </header>
+
+  <main>
+    <div class="cart-items">
+      <!-- Cart items will be dynamically added here -->
+    </div>
+
+    <div class="cart-summary">
+      <h2>Cart Summary</h2>
+      <div class="subtotal">
+        <span class="label">Subtotal:</span>
+        <span class="value">$0.00</span>
+      </div>
+      <div class="total">
+        <span class="label">Total:</span>
+        <span class="value">$0.00</span>
+      </div>
+      <button class="checkout-btn">Checkout</button>
+      <a href="./shop.html" class="continue-shopping-link">Continue Shopping</a>
+    </div>
+  </main>
+
+  <footer>
+        <a href="#" className="footer__logo">
+          STEVE
+        </a>
+
+        <ul className="permalinks">
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#about">Shop</a>
+          </li>
+          <li>
+            <a href="#experience">cart</a>
+          </li>
+          <li>
+            <a href="#services">about</a>
+          </li>
+          <li>
+            <a href="#portfolio">login</a>
+          </li>
+        </ul>
+
+        <div className="footer__socials">
+          <a href="https://facebook.com"><FaFacebookF /></a>
+          <a href="https://instagram.com"><FiInstagram /></a>
+          <a href="https://twitter.com"><IoLogoTwitter /></a>
+        </div>
+
+        <div className='footer__copyright'>
+            <small> &copy; designed by steve jones, All rights reserved</small>
+        </div>
+      </footer>
+
+  <script src="script.js"></script>
+</body>
+
+<script>
+    // Sample data for cart items
+var cartItems = [
+  { name: 'Product 1', price: 10, quantity: 2 },
+  { name: 'Product 2', price: 15, quantity: 1 },
+  { name: 'Product 3', price: 8, quantity: 3 }
+];
+
+// Function to calculate subtotal and total
+function calculateTotal() {
+  var subtotal = 0;
+  cartItems.forEach(function(item) {
+    subtotal += item.price * item.quantity;
+  });
+
+  var total = subtotal;
+
+  var subtotalElement = document.querySelector('.subtotal .value');
+  var totalElement = document.querySelector('.total .value');
+
+  subtotalElement.textContent = '$' + subtotal.toFixed(2);
+  totalElement.textContent = '$' + total.toFixed(2);
+}
+
+// Function to display cart items
+function displayCartItems() {
+  var cartItemsContainer = document.querySelector('.cart-items');
+
+  cartItems.forEach(function(item) {
+    var itemElement = document.createElement('div');
+    itemElement.classList.add('item');
+
+    var nameElement = document.createElement('span');
+    nameElement.classList.add('name');
+    nameElement.textContent = item.name;
+
+    var priceElement = document.createElement('span');
+    priceElement.classList.add('price');
+    priceElement.textContent = '$' + item.price.toFixed(2);
+
+    var quantityElement = document.createElement('input');
+    quantityElement.classList.add('quantity');
+    quantityElement.type = 'number';
+    quantityElement.value = item.quantity;
+    quantityElement.addEventListener('change', function(event) {
+      item.quantity = parseInt(event.target.value);
+      calculateTotal();
+    });
+
+    var removeButton = document.createElement('button');
+    removeButton.classList.add('remove-btn');
+    removeButton.textContent = 'Remove';
+    removeButton.addEventListener('click', function() {
+      var index = cart/* Sample code continued */
+
+      var index = cartItems.indexOf(item);
+      cartItems.splice(index, 1);
+      cartItemsContainer.removeChild(itemElement);
+      calculateTotal();
+    });
+
+    itemElement.appendChild(nameElement);
+    itemElement.appendChild(priceElement);
+    itemElement.appendChild(quantityElement);
+    itemElement.appendChild(removeButton);
+
+    cartItemsContainer.appendChild(itemElement);
+  });
+}
+
+// Initial function calls
+displayCartItems();
+calculateTotal();
+</script>
+</html>
